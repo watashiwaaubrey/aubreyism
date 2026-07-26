@@ -1,71 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Background Music</title>
-
-  <!-- Spectral Light 300 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: "Spectral", serif;
-      font-weight: 300;
-      color: #f9f9f9;
-      font-size: 12px;
-      line-height: 24px;
-    }
-
-    .intro {
-      margin: 20px;
-    }
-
-    .track {
-      font-weight: 700;
-      text-decoration: underline;
-      color: #f9f9f9;
-    }
-  </style>
-
-</head>
-
-<body>
-
-<div class="intro">
-  <p>
-    A curated proof sheet of artworks I've made, with Spotify links to playlists that shape their stories.
-    Put your headphones on and enjoy, xo.
-  </p>
-
-  <p>
-    <a class="track" href="#" target="_blank">
-      Listen to August’s accompanying track here.
-    </a>
-  </p>
-</div>
-
-
-<audio id="bgMusic" loop preload="auto">
-  <source src="https://audio.jukehost.co.uk/019f9b78-e6f1-7051-ac14-ff4de53d8f23" type="audio/mpeg">
-</audio>
-
 <script>
-const music = document.getElementById("bgMusic");
+const player = document.getElementById("arf-bg-music");
 
-function startMusic() {
-  music.volume = 0.5;      // 50% volume
-  music.play().catch(err => console.log(err));
+async function enableAudio() {
+    player.muted = false;
 
-  document.removeEventListener("click", startMusic);
-  document.removeEventListener("touchstart", startMusic);
-  document.removeEventListener("keydown", startMusic);
+    try {
+        await player.play();
+    } catch (e) {
+        console.log(e);
+    }
+
+    window.removeEventListener("click", enableAudio);
+    window.removeEventListener("touchstart", enableAudio);
+    window.removeEventListener("keydown", enableAudio);
 }
 
-document.addEventListener("click", startMusic);
-document.addEventListener("touchstart", startMusic);
-document.addEventListener("keydown", startMusic);
+window.addEventListener("click", enableAudio);
+window.addEventListener("touchstart", enableAudio);
+window.addEventListener("keydown", enableAudio);
 </script>
-
-</body>
-</html>
