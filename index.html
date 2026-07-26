@@ -1,21 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Background Music</title>
+</head>
+<body>
+
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://audio.jukehost.co.uk/019f9b78-e6f1-7051-ac14-ff4de53d8f23" type="audio/mpeg">
+</audio>
+
 <script>
-const player = document.getElementById("arf-bg-music");
+const music = document.getElementById("bgMusic");
 
-async function enableAudio() {
-    player.muted = false;
+function startMusic() {
+  music.volume = 0.5;      // 50% volume
+  music.play().catch(err => console.log(err));
 
-    try {
-        await player.play();
-    } catch (e) {
-        console.log(e);
-    }
-
-    window.removeEventListener("click", enableAudio);
-    window.removeEventListener("touchstart", enableAudio);
-    window.removeEventListener("keydown", enableAudio);
+  document.removeEventListener("click", startMusic);
+  document.removeEventListener("touchstart", startMusic);
+  document.removeEventListener("keydown", startMusic);
 }
 
-window.addEventListener("click", enableAudio);
-window.addEventListener("touchstart", enableAudio);
-window.addEventListener("keydown", enableAudio);
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
+document.addEventListener("keydown", startMusic);
 </script>
+
+</body>
+</html>
